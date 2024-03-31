@@ -20,13 +20,13 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   
-                   sh 'docker login -u animshamura -p getsetit1
-
+                   withCredentials([string(credentialsId: 'docpwd', variable: 'pwd')]) {
+                   sh 'docker login -u animshamura -p ${pwd}
                    sh 'docker push animshamura/devops-integration'
-                }
+                   }
             }
         }
 
     }
+}
 }
